@@ -16,7 +16,7 @@ def readData(fileName):
     
     return xcord,ycord
     
-X_raw,Y_raw=readData("data/lsm_data.csv")
+X_raw,Y_raw=readData("lsm_data.csv")
 
 #y=k*x + b
 def func(params,x):
@@ -30,6 +30,7 @@ def error(params,x,y,s):
 init_params = [1,1];
 ###主函数从此开始###
 
+#这里要用np.array
 X=np.array(X_raw)
 Y=np.array(Y_raw)
 
@@ -38,9 +39,10 @@ Para=leastsq(error,init_params,args=(X,Y,s)) #把error函数中除了p以外的�
 k,b=Para[0]
 print("k="+str(k)+ ";b="+str(b))
 
-
+#点图
 plt.scatter(X_raw,Y_raw,s=30,c='red',marker='s')
  
+#拟合线
 x=np.linspace(100,240,20)
 y=k*x+b
 plt.plot(x,y,'b--')
